@@ -5,6 +5,8 @@ metadata:
   name: require-label
 # The `spec` defines properties of the policy.
 spec:
+  validationFailureAction: enforce
+  background: true
   # The `rules` is one or more rules which must be true.
   rules:
   - name: require-label
@@ -20,8 +22,6 @@ spec:
           - argocd
     # The `validate` statement tries to positively check what is defined. If the statement, when compared with the requested resource, is true, it is allowed. If false, it is blocked.
     validate:
-      # The `failureAction` tells Kyverno if the resource being validated should be allowed but reported (`Audit`) or blocked (`Enforce`).
-      failureAction: Enforce
       # The `message` is what gets displayed to a user if this rule fails validation.
       message: "You must have label `team` with value `learning` set on all new pods."
       # The `pattern` object defines what pattern will be checked in the resource. In this case, it is looking for `metadata.labels` with `purpose=production`.
